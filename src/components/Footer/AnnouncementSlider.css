@@ -1,0 +1,16 @@
+.header .top-bar .announcement-slider {
+  color: var(--accent-color);
+  font-weight: 500;
+  height: 24px;
+  overflow: hidden;
+}
+
+.header .top-bar .announcement-slider .swiper-wrapper {
+  height: auto 
+}
+
+.header .top-bar .announcement-slider .swiper-slide {
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+}

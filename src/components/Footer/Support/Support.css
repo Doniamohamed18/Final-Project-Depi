@@ -1,0 +1,367 @@
+.support .support-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.support .support-header .header-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.support .support-header .header-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 15px;
+}
+
+.support .support-header .header-content h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color) 0%, color-mix(in srgb, var(--accent-color), transparent 80%) 100%);
+  border-radius: 2px;
+}
+
+.support .support-header .header-content p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 1.1rem;
+}
+
+.support .quick-support {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 70px;
+}
+
+@media (max-width: 991px) {
+  .support .quick-support {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .support .quick-support {
+    grid-template-columns: 1fr;
+  }
+}
+
+.support .quick-support .action-item {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.support .quick-support .action-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, color-mix(in srgb, var(--accent-color), transparent 85%), color-mix(in srgb, var(--accent-color), transparent 95%));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.support .quick-support .action-item:hover::before {
+  opacity: 1;
+}
+
+.support .quick-support .action-item .action-content {
+  background-color: var(--surface-color);
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  transition: transform 0.3s;
+}
+
+.support .quick-support .action-item .action-content:hover {
+  transform: translateY(-5px);
+}
+
+.support .quick-support .action-item .action-content i {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.support .quick-support .action-item .action-content h4 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.support .quick-support .action-item .action-content p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  margin-bottom: 25px;
+}
+
+.support .quick-support .action-item .action-content .action-button {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: var(--accent-color);
+}
+
+.support .quick-support .action-item .action-content .action-button:hover {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  transform: translateY(-2px);
+}
+
+.support .help-categories {
+  margin-bottom: 70px;
+}
+
+.support .help-categories h3 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.support .help-categories .category-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+@media (max-width: 991px) {
+  .support .help-categories .category-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.support .help-categories .category-card {
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  padding: 30px;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.support .help-categories .category-card:hover {
+  transform: translateX(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.support .help-categories .category-card:hover .arrow {
+  transform: translateX(5px);
+  opacity: 1;
+}
+
+.support .help-categories .category-card .icon {
+  width: 60px;
+  height: 60px;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.support .help-categories .category-card .icon i {
+  font-size: 1.75rem;
+  color: var(--accent-color);
+}
+
+.support .help-categories .category-card h5 {
+  color: var(--heading-color);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.support .help-categories .category-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.support .help-categories .category-card ul li {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+
+.support .help-categories .category-card ul li:last-child {
+  margin-bottom: 0;
+}
+
+.support .help-categories .category-card .arrow {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.support .self-help .content-box h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.support .self-help .content-box .subtitle {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  margin-bottom: 30px;
+}
+
+.support .self-help .content-box .resource-links {
+  display: grid;
+  gap: 20px;
+}
+
+.support .self-help .content-box .resource-link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--surface-color);
+  border-radius: 15px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.support .self-help .content-box .resource-link:hover {
+  transform: translateX(10px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.support .self-help .content-box .resource-link:hover i {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.support .self-help .content-box .resource-link i {
+  width: 50px;
+  height: 50px;
+  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  transition: all 0.3s;
+}
+
+.support .self-help .content-box .resource-link .link-content h6 {
+  margin: 0 0 5px;
+  color: var(--heading-color);
+  font-size: 1.1rem;
+}
+
+.support .self-help .content-box .resource-link .link-content p {
+  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 0.9rem;
+}
+
+.support .self-help .faq-section {
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  padding: 40px;
+}
+
+@media (max-width: 991px) {
+  .support .self-help .faq-section {
+    margin-top: 40px;
+  }
+}
+
+.support .self-help .faq-section h4 {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.support .self-help .faq-section .faq-list .faq-item {
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  margin-bottom: 15px;
+}
+
+.support .self-help .faq-section .faq-list .faq-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.support .self-help .faq-section .faq-list .faq-item h3 {
+  margin: 0;
+  padding: 15px 0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: var(--heading-color);
+  transition: all 0.3s;
+}
+
+.support .self-help .faq-section .faq-list .faq-item h3 i {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  transition: transform 0.3s;
+}
+
+.support .self-help .faq-section .faq-list .faq-item .faq-answer {
+  display: none;
+  padding: 0 0 15px;
+}
+
+.support .self-help .faq-section .faq-list .faq-item .faq-answer p {
+  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+}
+
+.support .self-help .faq-section .faq-list .faq-item.faq-active h3 {
+  color: var(--accent-color);
+}
+
+.support .self-help .faq-section .faq-list .faq-item.faq-active h3 i {
+  transform: rotate(45deg);
+}
+
+.support .self-help .faq-section .faq-list .faq-item.faq-active .faq-answer {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .support .support-header .header-content h2 {
+    font-size: 2rem;
+  }
+
+  .support .category-card {
+    grid-template-columns: auto 1fr !important;
+  }
+
+  .support .category-card .arrow {
+    display: none;
+  }
+
+  .support .self-help .resource-link {
+    padding: 15px;
+  }
+
+  .support .self-help .resource-link i {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .support .self-help .faq-section {
+    padding: 30px 20px;
+  }
+}

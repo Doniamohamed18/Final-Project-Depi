@@ -1,0 +1,386 @@
+.privacy .privacy-header {
+  text-align: center;
+  margin-bottom: 70px;
+  padding: 60px 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-color), transparent 95%) 0%, color-mix(in srgb, var(--accent-color), transparent 98%) 100%);
+  border-radius: 30px;
+}
+
+.privacy .privacy-header .header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.privacy .privacy-header .header-content .update-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: var(--surface-color);
+  border-radius: 30px;
+  color: var(--accent-color);
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+.privacy .privacy-header .header-content h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  background: linear-gradient(45deg, var(--heading-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.privacy .privacy-header .header-content p {
+  font-size: 1.2rem;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin-bottom: 30px;
+}
+
+.privacy .privacy-header .header-content .privacy-badges {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media (max-width: 576px) {
+  .privacy .privacy-header .header-content .privacy-badges {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+}
+
+.privacy .privacy-header .header-content .privacy-badges .badge-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 25px;
+  background-color: var(--surface-color);
+  border-radius: 15px;
+}
+
+.privacy .privacy-header .header-content .privacy-badges .badge-item i {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.privacy .privacy-header .header-content .privacy-badges .badge-item span {
+  font-weight: 500;
+}
+
+.privacy .info-section {
+  margin-bottom: 70px;
+}
+
+.privacy .info-section .section-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 991px) {
+  .privacy .info-section .section-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .privacy .info-section .section-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.privacy .info-section .info-card {
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.privacy .info-section .info-card:hover {
+  transform: translateY(-10px);
+}
+
+.privacy .info-section .info-card:hover .card-header i {
+  transform: scale(1.1);
+}
+
+.privacy .info-section .info-card .card-header {
+  padding: 30px;
+  text-align: center;
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.privacy .info-section .info-card .card-header i {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 15px;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.privacy .info-section .info-card .card-header h3 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.privacy .info-section .info-card .card-content {
+  padding: 30px;
+}
+
+.privacy .info-section .info-card .card-content .info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.privacy .info-section .info-card .card-content .info-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 15px;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+}
+
+.privacy .info-section .info-card .card-content .info-list li:last-child {
+  margin-bottom: 0;
+}
+
+.privacy .info-section .info-card .card-content .info-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+}
+
+.privacy .security-section {
+  margin-bottom: 70px;
+  text-align: center;
+}
+
+.privacy .security-section .section-header {
+  margin-bottom: 40px;
+}
+
+.privacy .security-section .section-header h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.privacy .security-section .section-header p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 1.1rem;
+}
+
+.privacy .security-section .measures-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+@media (max-width: 991px) {
+  .privacy .security-section .measures-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .privacy .security-section .measures-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.privacy .security-section .measure-item {
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  padding: 30px;
+  transition: transform 0.3s;
+}
+
+.privacy .security-section .measure-item:hover {
+  transform: translateY(-5px);
+}
+
+.privacy .security-section .measure-item:hover i {
+  color: var(--accent-color);
+}
+
+.privacy .security-section .measure-item i {
+  font-size: 2rem;
+  color: color-mix(in srgb, var(--accent-color), transparent 30%);
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+.privacy .security-section .measure-item h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.privacy .security-section .measure-item p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.privacy .rights-section {
+  margin-bottom: 70px;
+}
+
+.privacy .rights-section .rights-content {
+  background-color: var(--surface-color);
+  border-radius: 30px;
+  padding: 50px;
+  text-align: center;
+}
+
+.privacy .rights-section .rights-content h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.privacy .rights-section .rights-content>p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  margin-bottom: 40px;
+}
+
+.privacy .rights-section .rights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 991px) {
+  .privacy .rights-section .rights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .privacy .rights-section .rights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.privacy .rights-section .right-item i {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.privacy .rights-section .right-item h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.privacy .rights-section .right-item p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.privacy .additional-info {
+  margin-bottom: 70px;
+}
+
+.privacy .additional-info .info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 991px) {
+  .privacy .additional-info .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .privacy .additional-info .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.privacy .additional-info .info-item {
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.privacy .additional-info .info-item h4 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: var(--heading-color);
+}
+
+.privacy .additional-info .info-item p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.privacy .privacy-contact .contact-box {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-color), transparent 95%) 0%, color-mix(in srgb, var(--accent-color), transparent 98%) 100%);
+  border-radius: 30px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+@media (max-width: 767px) {
+  .privacy .privacy-contact .contact-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.privacy .privacy-contact .contact-box .contact-icon {
+  width: 70px;
+  height: 70px;
+  background-color: var(--accent-color);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.privacy .privacy-contact .contact-box .contact-icon i {
+  font-size: 2rem;
+  color: var(--contrast-color);
+}
+
+.privacy .privacy-contact .contact-box .contact-content {
+  flex: 1;
+}
+
+.privacy .privacy-contact .contact-box .contact-content h4 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.privacy .privacy-contact .contact-box .contact-content p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  margin-bottom: 20px;
+}
+
+.privacy .privacy-contact .contact-box .contact-content .contact-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.privacy .privacy-contact .contact-box .contact-content .contact-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
