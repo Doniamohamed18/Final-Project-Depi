@@ -1,7 +1,15 @@
 import React from 'react'
-import { NavLink } from 'react-router'
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from 'react-router';
+
 
 function OrderStatus() {
+
+
+    const { user, loading } = useSelector((state) => state.auth);
+
+    const isAuthenticated = !!user;
+
     return (
         <div>
             <main className="main">
@@ -20,10 +28,12 @@ function OrderStatus() {
                     </div>
                 </div>
                 {/* End Page Title */}
+
                 {/* Account Section */}
                 <section id="account" className="account section">
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         {/* Mobile Menu Toggle */}
+
                         <div className="mobile-menu d-lg-none mb-4">
                             <button
                                 className="mobile-menu-toggle"
@@ -35,6 +45,7 @@ function OrderStatus() {
                                 <span>Menu</span>
                             </button>
                         </div>
+
                         <div className="row g-4">
                             {/* Profile Menu */}
                             <div className="col-lg-3">
@@ -43,7 +54,7 @@ function OrderStatus() {
                                     <div className="user-info" data-aos="fade-right">
                                         <div className="user-avatar">
                                             <img
-                                                src="assets/img/person/person-f-1.webp"
+                                                src="assets/img/person/user2.jpg"
                                                 alt="Profile"
                                                 loading="lazy"
                                             />
@@ -51,7 +62,7 @@ function OrderStatus() {
                                                 <i className="bi bi-shield-check" />
                                             </span>
                                         </div>
-                                        <h4>Sarah Anderson</h4>
+                                        <h4><span className="sitename">{user?.name}</span></h4>
                                         <div className="user-status">
                                             <i className="bi bi-award" />
                                             <span>Premium Member</span>
@@ -68,16 +79,18 @@ function OrderStatus() {
                                                 >
                                                     <i className="bi bi-box-seam" />
                                                     <span>My Orders</span>
-                                                    <span className="badge">3</span>
+                                                    {/* <span className="badge">3</span> */}
                                                 </a>
                                             </li>
-                                            <li className="nav-item">
+
+                                            {/* <li className="nav-item">
                                                 <a className="nav-link" data-bs-toggle="tab" href="#wishlist">
                                                     <i className="bi bi-heart" />
                                                     <span>Wishlist</span>
                                                     <span className="badge">12</span>
                                                 </a>
-                                            </li>
+                                            </li> */}
+
                                             <li className="nav-item">
                                                 <a className="nav-link" data-bs-toggle="tab" href="#wallet">
                                                     <i className="bi bi-wallet2" />
@@ -112,19 +125,23 @@ function OrderStatus() {
                                                 <i className="bi bi-question-circle" />
                                                 <span>Help Center</span>
                                             </NavLink>
-                                            <a href="#" className="logout-link">
+
+                                            {/* <a href="#" className="logout-link">
                                                 <i className="bi bi-box-arrow-right" />
                                                 <span>Log Out</span>
-                                            </a>
+                                            </a> */}
+                                            
                                         </div>
                                     </nav>
                                 </div>
                             </div>
+
                             {/* Content Area */}
                             <div className="col-lg-9">
                                 <div className="content-area">
                                     <div className="tab-content">
                                         {/* Orders Tab */}
+
                                         <div className="tab-pane fade show active" id="orders">
                                             <div className="section-header" data-aos="fade-up">
                                                 <h2>My Orders</h2>
@@ -751,6 +768,7 @@ function OrderStatus() {
                                                 </button>
                                             </div>
                                         </div>
+
                                         {/* Wishlist Tab */}
                                         <div className="tab-pane fade" id="wishlist">
                                             <div className="section-header" data-aos="fade-up">
@@ -887,6 +905,7 @@ function OrderStatus() {
                                                 </div>
                                             </div>
                                         </div>
+
                                         {/* Payment Methods Tab */}
                                         <div className="tab-pane fade" id="wallet">
                                             <div className="section-header" data-aos="fade-up">
@@ -963,6 +982,7 @@ function OrderStatus() {
                                                 </div>
                                             </div>
                                         </div>
+
                                         {/* Reviews Tab */}
                                         <div className="tab-pane fade" id="reviews">
                                             <div className="section-header" data-aos="fade-up">
@@ -1083,6 +1103,7 @@ function OrderStatus() {
                                                 </div>
                                             </div>
                                         </div>
+
                                         {/* Addresses Tab */}
                                         <div className="tab-pane fade" id="addresses">
                                             <div className="section-header" data-aos="fade-up">
@@ -1179,6 +1200,7 @@ function OrderStatus() {
                                                 </div>
                                             </div>
                                         </div>
+
                                         {/* Settings Tab */}
                                         <div className="tab-pane fade" id="settings">
                                             <div className="section-header" data-aos="fade-up">
@@ -1186,6 +1208,7 @@ function OrderStatus() {
                                             </div>
                                             <div className="settings-content">
                                                 {/* Personal Information */}
+
                                                 <div className="settings-section" data-aos="fade-up">
                                                     <h3>Personal Information</h3>
                                                     <form className="php-email-form settings-form">
@@ -1250,6 +1273,7 @@ function OrderStatus() {
                                                         </div>
                                                     </form>
                                                 </div>
+
                                                 {/* Email Preferences */}
                                                 <div
                                                     className="settings-section"
@@ -1301,6 +1325,7 @@ function OrderStatus() {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 {/* Security Settings */}
                                                 <div
                                                     className="settings-section"
@@ -1362,6 +1387,7 @@ function OrderStatus() {
                                                         </div>
                                                     </form>
                                                 </div>
+                                                
                                                 {/* Delete Account */}
                                                 <div
                                                     className="settings-section danger-zone"

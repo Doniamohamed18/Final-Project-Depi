@@ -68,7 +68,6 @@ const productsSlice = createSlice({
                     break;
                 }
             }
-            // 💡 ملاحظة: يجب أن تتأكد أن ID المنتج هو نفسه في كل مكان
             localStorage.setItem("products", JSON.stringify(state.products));
         },
 
@@ -95,37 +94,34 @@ const productsSlice = createSlice({
                 
                 const apiResults = action.payload.results;
                 
-                // 🛑 الحل: دمج المنتجات الجديدة مع الحفاظ على المخزون المحلي
+ 
                 if (Object.keys(state.products).length === 0) {
-                    // إذا كان الـ State فارغاً (أول مرة تشغيل)، استخدم نتائج API مباشرة
+                   
                     state.products = apiResults;
                 } else {
-                    // إذا كان الـ State يحتوي على بيانات (جاءت من localStorage)، قم بالدمج:
                     for (const category in apiResults) {
                         if (state.products[category]) {
-                            // دمج المنتجات في كل فئة
+                         
                             state.products[category] = apiResults[category].map(newProduct => {
-                                // ابحث عن المنتج القديم (الذي يحمل المخزون المخصوم)
+                              
                                 const existingProduct = state.products[category].find(p => String(p.id) === String(newProduct.id));
                                 
-                                // إذا وجدنا المنتج القديم، نستخدم قيمته المخزونة (خصوصاً المخزون)
+                               
                                 if (existingProduct) {
-                                    // نستخدم البيانات الجديدة (للتحديثات مثل الأسعار، الصور، الخ...)
-                                    // لكن نحافظ على قيمة المخزون (stock) المحلية المخصومة.
+                                    
                                     return { ...newProduct, stock: existingProduct.stock };
                                 }
                                 
-                                // إذا كان منتجاً جديداً، أضفه كما هو
+                             
                                 return newProduct;
                             });
                         } else {
-                            // إذا كانت فئة جديدة، أضفها بالكامل
+                             
                             state.products[category] = apiResults[category];
                         }
                     }
                 }
                 
-                // 💡 بعد الانتهاء من عملية الدمج/التحديث، نقوم بالحفظ.
                 localStorage.setItem("products", JSON.stringify(state.products));
             })
             .addCase(fetchAllProducts.rejected, (state) => {

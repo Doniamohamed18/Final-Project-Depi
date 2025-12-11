@@ -6,7 +6,15 @@
 }
 
 
-.account .wishlist-grid .empty-wishlist {
+.account .wishlist-grid  {
+  font-size: 1.5rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 60px;
+  grid-column: 1 / -1; /* يمتد على كل الأعمدة */
+}
+
+.empty-wishlist {
   font-size: 1.5rem;
   color: #555;
   text-align: center;
@@ -186,3 +194,4 @@
 .account .wishlist-grid .wishlist-card .wishlist-content .btn-notify:hover {
   background-color: #e5e7eb;
 }
+

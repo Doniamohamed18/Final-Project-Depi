@@ -5,13 +5,13 @@ import { addToCartWithStock } from "../Data/addToCartWithStock";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer/Footer";
 import "./Wishlist.css";
+import { Link } from 'react-router-dom'
 
 function AllWishlist() {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.wishlist);
   const allProducts = useSelector((state) => state.products.products);
 
-  // دالة للحصول على stock الحالي من products slice
   const getCurrentStock = (id) => {
     for (const cat in allProducts) {
       const p = allProducts[cat].find((x) => x.id === id);
@@ -43,38 +43,78 @@ function AllWishlist() {
         if (product) break;
       }
       if (product && product.stock > 0) {
-       dispatch(addToCartWithStock({ product, quantity: 1 }));
+        dispatch(addToCartWithStock({ product, quantity: 1 }));
 
       }
+    });
+  };
+
+
+  const handleDeleteAll = () => {
+    wishlistItems.forEach((item) => {
+      dispatch(removeFromWishlist(item.id));
     });
   };
 
   return (
     <>
       <Navbar />
-      <br />
+
+      <div className="page-title light-background">
+        <div className="container d-lg-flex justify-content-between align-items-center">
+          <h1 className="mb-2 mb-lg-0">My Wishlist</h1>
+          <nav className="breadcrumbs">
+            <ol>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li className="current">My Wishlist</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
       <div className="account">
         <div className="tab-pane fade show active" id="wishlist">
-          <div className="section-header" data-aos="fade-up">
-            <h2 className="text-center">My Wishlist</h2>
-            <div className="header-actions text-center mb-4">
-              <button
-                type="button"
-                className="btn-add-all"
-                onClick={handleAddAllToCart}
-              >
-                Add All to Cart
-              </button>
-            </div>
+
+          <div
+            className="section-header d-flex justify-content-between align-items-center px-5"
+            data-aos="fade-up"
+          >
+
+            {/* زرار الشمال */}
+            <button
+              type="button"
+              className="btn btn-outline-dark my-3"
+              onClick={handleAddAllToCart}
+            >
+              Add All to Cart
+            </button>
+
+            {/* زرار اليمين */}
+            <button
+              type="button"
+              className="btn btn-outline-danger my-3"
+              onClick={handleDeleteAll}
+            >
+              Remove All 
+            </button>
+
           </div>
 
           <div className="wishlist-grid">
             {wishlistItems.length === 0 ? (
-              <h4 className="empty-wishlist">Your wishlist is empty ❤️</h4>
+              <div className="empty-wishlist">
+                <h4 >Your wishlist is empty ❤️</h4>
+                    <Link to="/Products" className="btn btn-dark my-3">
+                        Back to Category
+                    </Link>
+              </div>
             ) : (
               wishlistItems.map((item, index) => {
                 const currentStock = getCurrentStock(item.id);
                 return (
+                  <>
                   <div
                     className="wishlist-card"
                     key={item.id}
@@ -140,6 +180,7 @@ function AllWishlist() {
                       )}
                     </div>
                   </div>
+                  </>
                 );
               })
             )}

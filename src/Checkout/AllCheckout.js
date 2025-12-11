@@ -22,13 +22,7 @@ function AllCheckout() {
     const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const isEmpty = cartItems.length === 0;
 
-
-
-
-    // جلب قائمة المنتجات الأصلية (للحصول على المخزون الحقيقي)
     const allProducts = useSelector((state) => state.products.products);
-
-
 
     const getRealProductStock = (id) => {
         for (const category in allProducts) {
@@ -42,33 +36,9 @@ function AllCheckout() {
         dispatch(removeItemWithStock(id));
     };
 
-    // دالة للتحكم في الزيادة/النقصان
     const handleQuantityChange = (id, newQuantity) => {
-        // نترك مهمة التحقق من المخزون لـ Redux Thunk
         dispatch(updateCartQuantityWithStock(id, newQuantity));
     };
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     useEffect(() => {
 
@@ -98,7 +68,6 @@ function AllCheckout() {
 
         // Function to initialize multi-step checkout
         function initMultiStepCheckout() {
-            // Get all checkout elements
             const checkoutSteps = document.querySelectorAll('.checkout-steps .step');
             const checkoutForms = document.querySelectorAll('.checkout-form');
             const nextButtons = document.querySelectorAll('.next-step');
@@ -133,21 +102,17 @@ function AllCheckout() {
             // Payment Method Selection for multi-step checkout
             paymentMethods.forEach(header => {
                 header.addEventListener('click', function () {
-                    // Get the radio input within this header
                     const radio = this.querySelector('input[type="radio"]');
                     if (radio) {
                         radio.checked = true;
 
-                        // Update active state for all payment methods
                         const allPaymentMethods = document.querySelectorAll('.payment-method');
                         allPaymentMethods.forEach(method => {
                             method.classList.remove('active');
                         });
 
-                        // Add active class to the parent payment method
                         this.closest('.payment-method').classList.add('active');
 
-                        // Show/hide payment method bodies
                         const allPaymentBodies = document.querySelectorAll('.payment-method-body');
                         allPaymentBodies.forEach(body => {
                             body.classList.add('d-none');
@@ -190,7 +155,6 @@ function AllCheckout() {
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
 
-                    // Basic validation
                     const requiredFields = form.querySelectorAll('[required]');
                     let isValid = true;
 
@@ -205,24 +169,19 @@ function AllCheckout() {
 
                     // If it's the final form and valid, show success message
                     if (isValid && form.closest('.checkout-form[data-form="4"]')) {
-                        // Hide form fields
                         const formFields = form.querySelectorAll('.form-group, .review-sections, .form-check, .d-flex');
                         formFields.forEach(field => {
                             field.style.display = 'none';
                         });
 
-                        // Show success message
                         const successMessage = form.querySelector('.success-message');
                         if (successMessage) {
                             successMessage.classList.remove('d-none');
-
-                            // Add animation
                             successMessage.style.animation = 'fadeInUp 0.5s ease forwards';
                         }
 
                         // Simulate redirect after 3 seconds
                         setTimeout(() => {
-                            // In a real application, this would redirect to an order confirmation page
                             console.log('Redirecting to order confirmation page...');
                         }, 3000);
                     }
@@ -231,7 +190,6 @@ function AllCheckout() {
 
             // Function to navigate between steps
             function navigateToStep(stepNumber) {
-                // Update steps
                 checkoutSteps.forEach(step => {
                     const stepNum = parseInt(step.getAttribute('data-step'));
 
@@ -267,7 +225,6 @@ function AllCheckout() {
                     if (formNum === stepNumber) {
                         form.classList.add('active');
 
-                        // Scroll to top of form on mobile
                         if (window.innerWidth < 768) {
                             form.scrollIntoView({
                                 behavior: 'smooth',
@@ -283,19 +240,15 @@ function AllCheckout() {
 
         // Function to initialize one-page checkout
         function initOnePageCheckout() {
-            // Payment Method Selection for one-page checkout
             const paymentOptions = document.querySelectorAll('.payment-option input[type="radio"]');
 
             paymentOptions.forEach(option => {
                 option.addEventListener('change', function () {
-                    // Update active class on payment options
                     document.querySelectorAll('.payment-option').forEach(opt => {
                         opt.classList.remove('active');
                     });
 
                     this.closest('.payment-option').classList.add('active');
-
-                    // Show/hide payment details
                     const paymentId = this.id;
                     document.querySelectorAll('.payment-details').forEach(details => {
                         details.classList.add('d-none');
@@ -312,7 +265,7 @@ function AllCheckout() {
                 checkoutForm.addEventListener('submit', function (e) {
                     e.preventDefault();
 
-                    // Basic validation
+                    //validation
                     const requiredFields = checkoutForm.querySelectorAll('[required]');
                     let isValid = true;
 
@@ -321,14 +274,13 @@ function AllCheckout() {
                             isValid = false;
                             field.classList.add('is-invalid');
 
-                            // Scroll to first invalid field
                             if (isValid === false) {
                                 field.scrollIntoView({
                                     behavior: 'smooth',
                                     block: 'center'
                                 });
                                 field.focus();
-                                isValid = null; // Set to null so we only scroll to the first invalid field
+                                isValid = null;
                             }
                         } else {
                             field.classList.remove('is-invalid');
@@ -337,7 +289,6 @@ function AllCheckout() {
 
                     // If form is valid, show success message
                     if (isValid === true) {
-                        // Hide form sections except the last one
                         const sections = document.querySelectorAll('.checkout-section');
                         sections.forEach((section, index) => {
                             if (index < sections.length - 1) {
@@ -345,21 +296,18 @@ function AllCheckout() {
                             }
                         });
 
-                        // Hide terms checkbox and place order button
                         const termsCheck = document.querySelector('.terms-check');
                         const placeOrderContainer = document.querySelector('.place-order-container');
 
                         if (termsCheck) termsCheck.style.display = 'none';
                         if (placeOrderContainer) placeOrderContainer.style.display = 'none';
 
-                        // Show success message
                         const successMessage = document.querySelector('.success-message');
                         if (successMessage) {
                             successMessage.classList.remove('d-none');
                             successMessage.style.animation = 'fadeInUp 0.5s ease forwards';
                         }
 
-                        // Scroll to success message
                         const orderReview = document.getElementById('order-review');
                         if (orderReview) {
                             orderReview.scrollIntoView({
@@ -368,15 +316,12 @@ function AllCheckout() {
                             });
                         }
 
-                        // Simulate redirect after 3 seconds
                         setTimeout(() => {
-                            // In a real application, this would redirect to an order confirmation page
                             console.log('Redirecting to order confirmation page...');
                         }, 3000);
                     }
                 });
 
-                // Add input event listeners to clear validation styling when user types
                 const formInputs = checkoutForm.querySelectorAll('input, select, textarea');
                 formInputs.forEach(input => {
                     input.addEventListener('input', function () {
@@ -390,14 +335,12 @@ function AllCheckout() {
 
         // Function to initialize input masks (common for both checkout types)
         function initInputMasks() {
-            // Card number input mask (format: XXXX XXXX XXXX XXXX)
             const cardNumberInput = document.getElementById('card-number');
             if (cardNumberInput) {
                 cardNumberInput.addEventListener('input', function (e) {
                     let value = e.target.value.replace(/\D/g, '');
                     if (value.length > 16) value = value.slice(0, 16);
 
-                    // Add spaces after every 4 digits
                     let formattedValue = '';
                     for (let i = 0; i < value.length; i++) {
                         if (i > 0 && i % 4 === 0) {
@@ -417,7 +360,6 @@ function AllCheckout() {
                     let value = e.target.value.replace(/\D/g, '');
                     if (value.length > 4) value = value.slice(0, 4);
 
-                    // Format as MM/YY
                     if (value.length > 2) {
                         value = value.slice(0, 2) + '/' + value.slice(2);
                     }
@@ -443,7 +385,6 @@ function AllCheckout() {
                     let value = e.target.value.replace(/\D/g, '');
                     if (value.length > 10) value = value.slice(0, 10);
 
-                    // Format as (XXX) XXX-XXXX
                     if (value.length > 0) {
                         if (value.length <= 3) {
                             value = '(' + value;
@@ -480,9 +421,6 @@ function AllCheckout() {
 
                     if (promoCode) {
                         // Simulate promo code validation
-                        // In a real application, this would make an API call to validate the code
-
-                        // For demo purposes, let's assume "DISCOUNT20" is a valid code
                         if (promoCode.toUpperCase() === 'DISCOUNT20') {
                             // Show success state
                             promoInput.classList.add('is-valid');
@@ -495,17 +433,14 @@ function AllCheckout() {
                             const btnPrice = document.querySelector('.btn-price');
 
                             if (orderTotal) {
-                                // Apply a 20% discount
                                 const currentTotal = parseFloat(orderTotal.textContent.replace('$', ''));
                                 const discountedTotal = (currentTotal * 0.8).toFixed(2);
                                 orderTotal.textContent = '$' + discountedTotal;
 
-                                // Update button price if it exists
                                 if (btnPrice) {
                                     btnPrice.textContent = '$' + discountedTotal;
                                 }
 
-                                // Add discount line
                                 const orderTotals = document.querySelector('.order-totals');
                                 if (orderTotals) {
                                     const discountElement = document.createElement('div');
@@ -515,7 +450,6 @@ function AllCheckout() {
                 <span>-$${(currentTotal * 0.2).toFixed(2)}</span>
               `;
 
-                                    // Insert before the total
                                     const totalElement = document.querySelector('.order-total');
                                     if (totalElement) {
                                         orderTotals.insertBefore(discountElement, totalElement);
@@ -523,11 +457,9 @@ function AllCheckout() {
                                 }
                             }
                         } else {
-                            // Show error state
                             promoInput.classList.add('is-invalid');
                             promoInput.classList.remove('is-valid');
 
-                            // Reset after 3 seconds
                             setTimeout(() => {
                                 promoInput.classList.remove('is-invalid');
                             }, 3000);
@@ -542,52 +474,20 @@ function AllCheckout() {
 
     }, []);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return (
         <div>
             <Navbar />
-
             {isEmpty ? (
                 <div className="container text-center py-5">
                     <h3>Your cart is empty 🛒</h3>
                     <p className="text-muted mb-4">Please add some items before checking out.</p>
-                    <Link to="/Products" className="btn btn-primary">
+                    <Link to="/Products" className="btn btn-dark">
                         Continue Shopping
                     </Link>
                 </div>
             ) : (
                 <>
-
-
-                    <>
+                    <div>
                         {/* Page Title */}
                         <div className="page-title light-background">
                             <div className="container d-lg-flex justify-content-between align-items-center">
@@ -603,7 +503,7 @@ function AllCheckout() {
                             </div>
                         </div>
                         {/* End Page Title */}
-                    </>
+                    </div>
 
                     <div>
                         {/* Checkout Section */}
@@ -948,7 +848,7 @@ function AllCheckout() {
                                                             >
                                                                 <span className="btn-text">Total Cart</span>
                                                                 <span className="btn-price">
-                                                                    {Math.ceil(cartTotal )} USD
+                                                                    {Math.ceil(cartTotal)} USD
                                                                 </span>
                                                             </button>
                                                         </div>
@@ -989,6 +889,7 @@ function AllCheckout() {
                                                                         <span className="quantity">{product.quantity} ×</span>
                                                                         <span className="price">{Math.ceil(product.price)}</span>
                                                                     </div>
+
                                                                     <div className='d-flex align-items-center gap-2 mt-2'>
                                                                         {/* زر الإزالة */}
                                                                         <button
@@ -1026,6 +927,7 @@ function AllCheckout() {
                                                                             +
                                                                         </button>
                                                                     </div>
+
                                                                     {/* رسالة تنبيه للمخزون */}
                                                                     {remainingStock === 0 && <span className="text-danger small mt-1 d-block">Max quantity reached.</span>}
                                                                 </div>
@@ -1048,7 +950,7 @@ function AllCheckout() {
                                                     </div>
                                                     <div className="order-total d-flex justify-content-between">
                                                         <span>Total</span>
-                                                        <span>{Math.ceil(cartTotal  + 5 + 3)} USD</span>
+                                                        <span>{Math.ceil(cartTotal + 5 + 3)} USD</span>
                                                     </div>
                                                 </div>
                                                 <div className="secure-checkout">
@@ -1076,7 +978,6 @@ function AllCheckout() {
                 </>
             )}
             <Footer />
-
         </div>
 
     )

@@ -27,26 +27,20 @@ function AllProductDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // 1. جلب البيانات من Redux
   const { products, loading } = useSelector((state) => state.products);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const wishlist = useSelector((state) => state.wishlist.wishlist);
 
-  // 2. العثور على المنتج الحالي
-  // بنستخدم useMemo أو مجرد البحث المباشر (هنا البحث المباشر تمام لأن Redux بيحدث الـ reference)
+
   const allProducts = Object.values(products).flat();
-  // مقارنة آمنة للـ ID
   const product = allProducts.find((item) => String(item.id) === String(id));
 
   const inWishlist = wishlist.find((i) => i.id === product?.id);
 
-  // 3. إدارة الكمية والـ Stock
   const [quantity, setQuantity] = useState(1);
-  // بنحسب الـ Max Live من المنتج مباشرة
   const maxStock = product?.stock || 0; 
   const MIN_QUANTITY = 1;
 
-  // 🔥 إصلاح: تحديث الكمية المختارة لو المخزون قل فجأة
   useEffect(() => {
     if (quantity > maxStock && maxStock > 0) {
       setQuantity(maxStock);
@@ -77,7 +71,6 @@ function AllProductDetails() {
     if (existingItem) {
       navigate("/checkout");
     } else {
-      // نستخدم نفس الـ Logic الموحد
      dispatch(addToCartWithStock({ product, quantity: quantity }));
 
       navigate("/checkout");
@@ -90,16 +83,13 @@ function AllProductDetails() {
     }
   };
 
-  // 4. إدارة الصور (Drift & Swiper)
   const [images, setImages] = useState([]);
   const [activeImage, setActiveImage] = useState(null);
 
-  // 🔥 إصلاح خطير: الاعتماد على product.id فقط وليس product كله
-  // عشان لما الـ Stock يتغير، الصور متعملش Reset
+
   useEffect(() => {
     if (product?.images?.length > 0) {
       setImages(product.images);
-      // بنحط الصورة الأولى فقط لو مفيش صورة نشطة أو لو المنتج اتغير كلياً
       setActiveImage((prev) => (product.images.includes(prev) ? prev : product.images[0]));
     }
   }, [product?.id, product?.images]); 
@@ -141,7 +131,6 @@ function AllProductDetails() {
   return (
     <div>
       <Navbar />
-      <br /><br /><br />
       <main className="main">
         <div className="page-title light-background">
           <div className="container d-lg-flex justify-content-between align-items-center">
@@ -165,7 +154,7 @@ function AllProductDetails() {
                     <div className="image-zoom-container">
                       <img
                         ref={mainImageRef}
-                        src={activeImage || product.thumbnail} // Fallback
+                        src={activeImage || product.thumbnail} 
                         alt="Product Main"
                         className="img-fluid main-product-image drift-zoom"
                         data-zoom={activeImage}
@@ -277,7 +266,6 @@ function AllProductDetails() {
                   <button
                     className="btn btn-warning"
                     onClick={handleBuyNow}
-                    // لو المنتج في الكارت اسمح له يروح Checkout حتى لو الستوك خلص
                     disabled={product.stock === 0 && !cartItems.find(i => i.id === product.id)}
                   >
                     Buy now

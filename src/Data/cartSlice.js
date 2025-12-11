@@ -17,7 +17,7 @@ const cartSlice = createSlice({
       const existing = state.cartItems.find(item => item.id === product.id);
 
       if (existing) {
-        existing.quantity += quantity;   // 🔥 مفيش أي Min ولا stock هنا
+        existing.quantity += quantity;  
       } else {
         state.cartItems.push({ ...product, quantity });
       }

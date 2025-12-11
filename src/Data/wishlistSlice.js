@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-// جلب العناصر المخزنة مسبقًا من localStorage
 const initialState = {
   wishlist: localStorage.getItem("wishlist")
     ? JSON.parse(localStorage.getItem("wishlist"))
@@ -37,16 +36,16 @@ const wishlistSlice = createSlice({
       }
     },
     removeFromWishlist: (state, action) => {
-      // 1) هات المنتج اللي هيتشال قبل الفلترة
+     
       const removedItem = state.wishlist.find((i) => i.id === action.payload);
 
-      // 2) فلتره بعدها
+      
       state.wishlist = state.wishlist.filter((i) => i.id !== action.payload);
 
-      // 3) حفظ اللسيت في localStorage
+     
       localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
 
-      // 4) لو المنتج موجود.. اعمل Toast جميل بالصورة
+      
       if (removedItem) {
         toast.error(
           <div

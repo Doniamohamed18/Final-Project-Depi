@@ -5,38 +5,37 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts } from "../Data/productsSlice";
 
 function Home() {
+
+  // Fetch products from "RTK"
   const dispatch = useDispatch();
-
-  // Fetch products from RTK
   const { products, loading, categories } = useSelector((state) => state.products);
-
-  // Cart from RTK
   const cartItems = useSelector((state) => state.cart.cartItems);
-   const wishlistCount = useSelector(state => state.wishlist.wishlist.length);
-
+  const wishlistCount = useSelector(state => state.wishlist.wishlist.length);
   const totalUniqueItems = cartItems.length;
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0); //quantity
+  const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);//price 
 
+  //call data from Api & 3 random products
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
-
   const [featuredproduct, setFeaturedproduct] = useState(null);
   const [miniProducts, setMiniProducts] = useState([]);
 
+  //Arr -> 1 featured & 2 mini products
   useEffect(() => {
     if (!loading) {
       const allProducts = categories.flatMap((cat) => products[cat] || []);
       const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
-
       setFeaturedproduct(shuffled[0]);
       setMiniProducts(shuffled.slice(1, 3));
     }
   }, [loading, products, categories]);
 
+  //Loading 
   if (loading) return <h2>Loading...</h2>;
-
+   
+// best 3
   const featuredItems = [
     ...(products.laptops?.filter((item) => item.title.includes("MacBook")) || []),
     ...(products.tablets?.filter((item) => item.title.includes("iPad")) || []),
@@ -47,10 +46,12 @@ function Home() {
 
   const combined = categories.flatMap((category) => products[category] || []);
 
+  //elmontagat ele arbt t5las
   const bestSellers = [...combined]
     .sort((a, b) => a.stock - b.stock)
     .slice(0, 3);
 
+    //Trending
   const trending = [...combined]
     .sort((a, b) => {
       if (b.rating !== a.rating) return b.rating - a.rating;
@@ -59,6 +60,7 @@ function Home() {
     })
     .slice(0, 3);
 
+    //Top Discount
   const topDiscount = [...combined]
     .sort((a, b) => b.discountPercentage - a.discountPercentage)
     .slice(0, 4);
@@ -76,6 +78,7 @@ function Home() {
 
   return (
     <div>
+
       {/* Hero Section */}
       <section id="hero" className="hero section">
         <div className="hero-container">
@@ -124,7 +127,7 @@ function Home() {
                         $
                         {Math.round(
                           featuredproduct.price *
-                            (1 - featuredproduct.discountPercentage / 100)
+                          (1 - featuredproduct.discountPercentage / 100)
                         )}
                       </span>
                       <span className="original-price">${featuredproduct.price}</span>
@@ -335,6 +338,7 @@ function Home() {
           </div>
         </div>
       </section>
+      
     </div>
   );
 }

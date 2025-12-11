@@ -15,9 +15,9 @@ function Footer() {
                                         <span className="sitename">NiceShop</span>
                                     </a>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in
-                                        nibh vehicula, facilisis magna ut, consectetur lorem. Proin eget
-                                        tortor risus.
+                                        NiceShop is a modern, clean, and user-friendly online shopping interface designed to allow
+                                        users to browse products easily. The project showcases a simple yet effective browsing
+                                        experience with structured content.
                                     </p>
                                     <div className="social-links mt-4">
                                         <h5>Connect With Us</h5>
@@ -49,19 +49,19 @@ function Footer() {
                                     <h4>Shop</h4>
                                     <ul className="footer-links">
                                         <li>
-                                            <a href="category.html">All Products</a>
+                                            <NavLink to="/Products">All Products</NavLink>
                                         </li>
                                         <li>
-                                            <a href="category.html">women's wear</a>
+                                            <NavLink to="/Products">SartPhones</NavLink>
                                         </li>
                                         <li>
-                                            <a href="category.html">Men's wear</a>
+                                            <NavLink to="/Products">Laptops</NavLink>
                                         </li>
                                         <li>
-                                            <a href="category.html">Accessories</a>
+                                            <NavLink to="/Products">Mobil Accessories</NavLink>
                                         </li>
                                         <li>
-                                            <a href="category.html">Kid's Fashion</a>
+                                            <NavLink to="/Products">Tablets</NavLink>
                                         </li>
                                     </ul>
                                 </div>
@@ -149,7 +149,7 @@ function Footer() {
                                     {/* You can delete the links only if you've purchased the pro version. */}
                                     {/* Licensing information: https://bootstrapmade.com/license/ */}
                                     {/* Purchase the pro version with working PHP/AJAX contact form: [buy-url] */}
-                                    Designed by <a href="https://bootstrapmade.com/">Donia's team</a>
+                                    Designed by <a href="#">Donia's team</a>
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-12">

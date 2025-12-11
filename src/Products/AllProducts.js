@@ -165,7 +165,6 @@ const AllProducts = () => {
   return (
     <>
       <Navbar />
-
       <div className="page-title light-background">
         <div className="container d-lg-flex justify-content-between align-items-center">
           <h1 className="mb-2 mb-lg-0">Category</h1>
@@ -588,6 +587,7 @@ const AllProducts = () => {
                 Next
               </button>
             </div>
+
           </div>
         </div>
       </div>

@@ -13,7 +13,6 @@ const Cart = () => {
     const cartItems = useSelector((state) => state.cart.cartItems);
     const products = useSelector((state) => state.products.products);
 
-    // 1. دالة مساعدة لجلب المنتج الحقيقي بأمان (String vs Number)
     const getRealProduct = (id) => {
         for (const cat in products) {
             const found = products[cat].find((p) => String(p.id) === String(id));
@@ -29,10 +28,8 @@ const Cart = () => {
         const realProduct = getRealProduct(id);
         const remainingStock = realProduct ? realProduct.stock : 0;
 
-        // 🔥 الحسبة الصحيحة للحد الأقصى: اللي في إيدك + اللي في المخزن
         const maxAvailable = item.quantity + remainingStock;
 
-        // التأكد من الحدود
         let finalQty = newQty;
         if (finalQty < 1) finalQty = 1;
         if (finalQty > maxAvailable) finalQty = maxAvailable;
@@ -74,6 +71,7 @@ const Cart = () => {
                     </nav>
                 </div>
             </div>
+
             <section id="cart" className="cart section">
                 <div className="container">
                     <div className="row">
@@ -90,7 +88,6 @@ const Cart = () => {
                                 </div>
 
                                 {cartItems.map((item) => {
-                                    // بنجيب المنتج عشان نعرف الـ Stock المتبقي للزرار
                                     const realProduct = getRealProduct(item.id);
                                     const remainingStock = realProduct ? realProduct.stock : 0;
                                     const maxAvailable = item.quantity + remainingStock;
@@ -113,7 +110,6 @@ const Cart = () => {
                                                                 {item.color && <span className="product-color">Color: {item.color}</span>}
                                                                 {item.size && <span className="product-size">Size: {item.size}</span>}
                                                             </div>
-                                                            {/* عرض رسالة لو المخزون خلص */}
                                                             {remainingStock === 0 && (
                                                                 <span className="text-danger" style={{ fontSize: "0.8rem" }}>Max stock reached</span>
                                                             )}
@@ -148,9 +144,9 @@ const Cart = () => {
                                                             className="quantity-input"
                                                             value={item.quantity}
                                                             min={1}
-                                                            max={maxAvailable} // استخدام الـ Max الصحيح
+                                                            max={maxAvailable}
                                                             onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                                                            // نمنع الكتابة اليدوية لأرقام خيالية
+                                                     
                                                             onBlur={(e) => {
                                                                 let val = parseInt(e.target.value);
                                                                 if (val > maxAvailable) handleQuantityChange(item.id, maxAvailable);
@@ -161,7 +157,7 @@ const Cart = () => {
                                                         <button
                                                             className="quantity-btn increase"
                                                             onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                                                            disabled={remainingStock === 0} // نقفل الزرار لو مفيش مخزون إضافي
+                                                            disabled={remainingStock === 0} 
                                                         >
                                                             <i className="bi bi-plus" />
                                                         </button>

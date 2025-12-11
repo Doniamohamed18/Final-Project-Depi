@@ -1,15 +1,34 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { useSelector } from "react-redux";
 import AnnouncementSlider from "./Footer/AnnouncementSlider"
 import "./Navbar.css"
 import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Data/authSlice";
+import { useNavigate } from "react-router-dom";
+
 
 function Navbar() {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [mobileNavActive, setMobileNavActive] = useState(false);
     const { cartItems } = useSelector((state) => state.cart);
     const wishlistCount = useSelector(state => state.wishlist.wishlist.length);
+
+    const { user, loading } = useSelector((state) => state.auth);
+
+    const isAuthenticated = !!user;
+    const isAdmin = user?.role === "admin";
+
+
+    const handleLogout = async () => {
+        await dispatch(logout());
+        navigate("/");
+    };
+
+
 
     const toggleMobileNav = () => {
         setMobileNavActive(!mobileNavActive);
@@ -87,18 +106,103 @@ function Navbar() {
                                 </button>
 
 
-                                {/* Account */} <div className="dropdown account-dropdown">
-                                    <button className="header-action-btn" data-bs-toggle="dropdown"> <i className="bi bi-person" /> </button>
-                                    <div className="dropdown-menu"> <div className="dropdown-header"> <h6> Welcome to <span className="sitename">FashionStore</span> </h6> <p className="mb-0">Access account &amp; manage orders</p> </div>
-                                        <div className="dropdown-body">
-                                            <NavLink className="dropdown-item d-flex align-items-center" to="/AllAccount" > <i className="bi bi-person-circle me-2" /> <span>My Profile</span> </NavLink>
-                                            <NavLink className="dropdown-item d-flex align-items-center" to="account.html" > <i className="bi bi-bag-check me-2" /> <span>My Orders</span> </NavLink>
-                                            <NavLink className="dropdown-item d-flex align-items-center" to="/Wishlist" > <i className="bi bi-heart me-2" /> <span>My Wishlist</span> </NavLink>
-                                            <NavLink className="dropdown-item d-flex align-items-center" to="account.html" > <i className="bi bi-gear me-2" /> <span>Settings</span> </NavLink> </div>
-                                        <div className="dropdown-footer"> <NavLink to="/LogIn" className="btn btn-primary w-100 mb-2"> Sign In </NavLink> <NavLink to="/Register" className="btn btn-outline-primary w-100"> Register </NavLink>
+                                {/* Account */}
+                                <div className="dropdown account-dropdown">
+                                    <button className="header-action-btn" data-bs-toggle="dropdown">
+                                        <i className="bi bi-person" />
+                                    </button>
+
+                                    <div className="dropdown-menu">
+
+                                        {/* Header */}
+                                        <div className="dropdown-header">
+                                            <h6>
+                                                {loading ? null : isAuthenticated ? (
+                                                    <>Welcome, <span className="sitename">{user?.name}</span></>
+                                                ) : (
+                                                    <>Welcome to <span className="sitename">FashionStore</span></>
+                                                )}
+                                            </h6>
+                                            <p className="mb-0">
+                                                {loading ? null : isAuthenticated
+                                                    ? "Manage your account"
+                                                    : "Access account & manage orders"}
+                                            </p>
                                         </div>
+
+                                        {/* Body */}
+                                        <div className="dropdown-body">
+                                            {loading ? null : !isAuthenticated ? (
+                                                <>
+                                                    {/* <NavLink className="dropdown-item d-flex align-items-center" to="/LogIn">
+                                                        <i className="bi bi-box-arrow-in-right me-2" />
+                                                        <span>Sign In</span>
+                                                    </NavLink>
+
+                                                    <NavLink className="dropdown-item d-flex align-items-center" to="/Register">
+                                                        <i className="bi bi-person-plus me-2" />
+                                                        <span>Create Account</span>
+                                                    </NavLink> */}
+                                                    <p style={{textAlign:"center"}}>Don't Have an accout ?</p>
+                                                    <p style={{textAlign:"center"}}>What are you watting for, create one now! 🤩</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <NavLink className="dropdown-item d-flex align-items-center" to="/AllAccount">
+                                                        <i className="bi bi-person-circle me-2" />
+                                                        <span>My Profile</span>
+                                                    </NavLink>
+
+                                                    <NavLink className="dropdown-item d-flex align-items-center" to="/AllAccount">
+                                                        <i className="bi bi-bag-check me-2" />
+                                                        <span>My Orders</span>
+                                                    </NavLink>
+
+                                                    <NavLink className="dropdown-item d-flex align-items-center" to="/Wishlist">
+                                                        <i className="bi bi-heart me-2" />
+                                                        <span>My Wishlist</span>
+                                                    </NavLink>
+
+                                                    {/* <NavLink className="dropdown-item d-flex align-items-center" to="/Settings">
+                                                        <i className="bi bi-gear me-2" />
+                                                        <span>Settings</span>
+                                                    </NavLink> */}
+
+                                                    {isAdmin && (
+                                                        <NavLink
+                                                            className="dropdown-item d-flex align-items-center text-danger"
+                                                            to="/admin"
+                                                        >
+                                                            <i className="bi bi-speedometer2 me-2" />
+                                                            <span>Admin Dashboard</span>
+                                                        </NavLink>
+                                                    )}
+                                                </>
+                                            )}
+                                        </div>
+
+                                        {/* Footer */}
+                                        <div className="dropdown-footer">
+                                            {loading ? null : !isAuthenticated ? (
+                                                <>
+                                                    <NavLink to="/LogIn" className="btn btn-primary w-100 mb-2">
+                                                        Sign In
+                                                    </NavLink>
+                                                    <NavLink to="/Register" className="btn btn-outline-primary w-100">
+                                                        Register
+                                                    </NavLink>
+                                                </>
+                                            ) : (
+                                                <button onClick={handleLogout} className="btn btn-danger w-100">
+                                                    Logout
+                                                </button>
+                                            )}
+                                        </div>
+
                                     </div>
                                 </div>
+
+
                                 {/* Wishlist */}
                                 <NavLink to="/Wishlist" className="header-action-btn d-none d-md-block">
                                     <i className="bi bi-heart" />

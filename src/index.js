@@ -7,6 +7,7 @@ import { store } from "./Data/store";
 import { Toaster } from "react-hot-toast";
 
 
+
 // صفحاتك
 import AllHome from './Home/AllHome';
 import AllContact from './Contact/AllContact';
@@ -23,6 +24,9 @@ import AllAbout from './About/AllAbout';
 import ALLLogIn from './LogIn/ALLLogIn';
 import AllRegister from './Register/AllRegister';
 import NotFound from "./PageNotFound/NotFound";
+import AdminLayout from './Admin/AdminLayout';
+import AddProduct from './Admin/AddProduct';  
+import Products from './Admin/Products';  
 
 
 export const router = createHashRouter([
@@ -30,7 +34,7 @@ export const router = createHashRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <AllHome /> }, // الصفحة الافتراضية
+      { path: "/", element: <AllHome /> }, 
       { path: "AllContact", element: <AllContact /> },
       { path: "AllAccount", element: <AllAccount /> },
       { path: "AllSupport", element: <AllSupport /> },
@@ -45,6 +49,18 @@ export const router = createHashRouter([
       { path: "About", element: <AllAbout /> },
       { path: "LogIn", element: <ALLLogIn /> },
       { path: "Register", element: <AllRegister /> },
+
+
+      {
+        path: "/admin",
+        element: <AdminLayout />,
+        children: [
+          { index: true, element:  <div>Admin Home</div> },  
+          { path: "add-product", element: <AddProduct/> }, 
+          { path: "products", element: <Products /> }, 
+        ],
+      },
+
       { path: "*", element: <NotFound /> },
     ],
   },
